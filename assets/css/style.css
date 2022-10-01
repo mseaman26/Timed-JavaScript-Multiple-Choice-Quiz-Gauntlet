@@ -76,7 +76,8 @@ body{
 }
 .choice{
     border: 5px solid black;
-    height: fit-content
+    height: fit-content;
+    padding-left: 10px;
 }
 .choice:hover{
     background-color: gray;

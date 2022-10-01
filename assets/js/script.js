@@ -8,7 +8,7 @@ var openingPage = {
 var quizPage = {
     display:"inline"
 }
-var currentQuestion = 0
+var currentQuestion = 2
 var questions = [
     {question:"What year was JavaScript created?",
     choices:[
@@ -30,7 +30,7 @@ var questions = [
 
     correctAnswer: 2
     },
-    {question:"What character is used to separate a key from a value within an object in JavaScript?",
+    {question:"Who is credited with creating JavaScript?",
     choices:
     [
         "Douglas Crockford",
@@ -135,13 +135,15 @@ function clearQuizPage(){
 }
 function renderQuestion(){
     var question = document.getElementsByClassName("question")
-    question[0].textContent = questions[0].question
+    question[0].textContent = questions[currentQuestion].question
 }
+
 function renderChoices(){
+    document.getElementById("choices").innerHTML = ""
     for(var i = 0; i < questions[currentQuestion].choices.length; i++){
     var element = document.createElement("div")
     element.className = "choice"
-    element.textContent = questions[0].choices[i]
+    element.textContent = questions[currentQuestion].choices[i]
     document.getElementById("choices").appendChild(element)
     }
 
@@ -165,7 +167,11 @@ document.getElementById("back-to-start").addEventListener("click", function(){
 })
 //next question button
 document.getElementById("next-button").addEventListener("click", function(){
-
+    currentQuestion = currentQuestion + 1
+    console.log(currentQuestion)
+    renderQuestion()
+    renderChoices()
+    activateChoices()
 })
 //event listener for choices
 
@@ -191,4 +197,21 @@ for(var i = 0; i< choiceEvents.length; i++){
     })
 
     
+}
+function activateChoices(){
+    var choiceEvents = document.getElementsByClassName("choice")
+console.log(choiceEvents[3])
+for(var i = 0; i< choiceEvents.length; i++){
+    choiceEvents[i].addEventListener("click", function(){
+
+        if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
+            console.log("correct")
+        }else {
+            console.log("incorrect")
+        }
+    })
+
+    
+}
+
 }
