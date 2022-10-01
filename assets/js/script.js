@@ -1,6 +1,6 @@
 
 
-var currentPage = "quiz-page"
+var currentPage = "opening-page"
 var currentPageDisplay = "inline"
 var openingPage = {
     display:"inline"
@@ -8,7 +8,7 @@ var openingPage = {
 var quizPage = {
     display:"inline"
 }
-var currentQuestion = 2
+var currentQuestion = 0
 var questions = [
     {question:"What year was JavaScript created?",
     choices:[
@@ -70,7 +70,7 @@ var questions = [
     ],
     correctAnswer: 0
     },
-    {question:"the first tow arguments of .addEventListener are ...",
+    {question:"the first two arguments of .addEventListener are ...",
     choices:
     [
         "type, object",
@@ -146,22 +146,24 @@ function renderChoices(){
     element.textContent = questions[currentQuestion].choices[i]
     document.getElementById("choices").appendChild(element)
     }
-
-
-    // document.getElementsByClassName("choice2")[0].textContent = questions[0].choice2
-    // document.getElementsByClassName("choice3")[0].textContent = questions[0].choice3
-    // document.getElementsByClassName("choice4")[0].textContent = questions[0].choice4
-
+}
+function startquiz(){
+    clearOpeningPage()
+    currentQuestion = 0
+    currentPage = "quiz-page"
+    clearQuizPage()
+    rednerCurrentPage()
+    renderQuestion()
+    renderChoices()
 }
 //start quiz button
 document.getElementById("start-quiz-button").addEventListener("click", function (){
-    clearCurrentPage()
-    currentPage = "quiz-page"
-    rednerCurrentPage()
+    startquiz()
 })
 //back to start button
 document.getElementById("back-to-start").addEventListener("click", function(){
     clearCurrentPage()
+    currentQuestion = 0;
     currentPage = "opening-page"
     rednerCurrentPage()
 })
