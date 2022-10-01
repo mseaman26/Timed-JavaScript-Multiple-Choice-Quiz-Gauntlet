@@ -1,0 +1,14 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+#renderOpeningPage{
+    position: relative;
+    display: flex;
+    from-left: 200px;
+    background-color: red;
+    margin: 5px;
+    border: 2px solid black;
+    height: auto;
+    width: fit-content;
+}
