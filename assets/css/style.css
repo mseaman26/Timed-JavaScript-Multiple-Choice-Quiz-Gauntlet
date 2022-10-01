@@ -2,13 +2,35 @@ body{
     display: flex;
     flex-direction: column;
 }
-#renderOpeningPage{
+#view-high-scores{
+    background-color: purple;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 25px;
+    color: white;
+    border: 3px solid black
+}
+#openingPage{
+
+}
+#title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#title-blurb{
     position: relative;
     display: flex;
-    from-left: 200px;
-    background-color: red;
-    margin: 5px;
-    border: 2px solid black;
-    height: auto;
-    width: fit-content;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 5px solid black;
+    margin-top: 100px;
+    width: 50%;
+    border-radius: 25px;
+    
+}
+#start-quiz-button{
+    position: relative;
+    margin-top: 50px;
 }
