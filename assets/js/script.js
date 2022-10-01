@@ -17,76 +17,101 @@ var questions = [
         1998,
         1999
     ],
-    // choice1:"1994",
-    // choice2:"1995",
-    // choice3:"1998",
-    // choice4:"1999",
-    correctAnswer: "choice2"
+    correctAnswer: 1
     },
     {question:"What character is used to separate a key from a value within an object in JavaScript?",
-    choice1:";",
-    choice2:",",
-    choice3:":",
-    choice4:"/",
-    correctAnswer: "choice3"
+    choices:
+    [
+        ";",
+        ",",
+        ":",
+        "/"
+    ],
+
+    correctAnswer: 2
     },
     {question:"What character is used to separate a key from a value within an object in JavaScript?",
-    choice1:"Douglas Crockford",
-    choice2:"Marc Andreessen",
-    choice3:"Sir Tim Berners-Lee",
-    choice4:"Brendan Eich",
-    correctAnswer: "choice4"
+    choices:
+    [
+        "Douglas Crockford",
+        "Marc Andreessen",
+        "Sir Tim Berners-Lee",
+        "Brendan Eich"
+    ],
+    correctAnswer: 3
     },
     {question:"When a variable is declared within a function, it is called a...",
-    choice1:"Local Variable",
-    choice2:"Functional Variable",
-    choice3:"Global Variable",
-    choice4:"Node",
-    correctAnswer: "choice1"
+    choices:
+    [
+        "Local Variable",
+        "Functional Variable",
+        "Global Variable",
+        "Node"
+    ],
+    correctAnswer: 0
     },
     {question:"Local Storage refers to storing data...",
-    choice1:"in the environment where the javascript is being written",
-    choice2:"within the user's browser",
-    choice3:"on a server located within 25 miles of the user",
-    choice4:"on a built-in hard drive",
-    correctAnswer: "choice2"
+    choices:
+    [
+        "in the environment where the javascript is being written",
+        "within the user's browser",
+        "on a server located within 25 miles of the user",
+        "on a built-in hard drive"
+    ],
+    correctAnswer: 1
     },
     {question:"To stop a function within setInterval(), we call...",
-    choice1:"clearInterval",
-    choice2:"break",
-    choice3:"return",
-    choice4:"exit",
-    correctAnswer: "choice1"
+    choices:
+    [
+        "clearInterval",
+        "break",
+        "return",
+        "exit"
+    ],
+    correctAnswer: 0
     },
     {question:"the first tow arguments of .addEventListener are ...",
-    choice1:"type, object",
-    choice2:"click, event",
-    choice3:"click, listener(function)",
-    choice4:"listener, type",
-    correctAnswer: "choice3"  
+    choices:
+    [
+        "type, object",
+        "click, event",
+        "click, listener(function)",
+        "listener, type"
+    ],
+    correctAnswer: 2
     },
     {question:"The ES6 JavaScript update was released in the year ...",
-    choice1:"2001",
-    choice2:"2008",
-    choice3:"2015",
-    choice4:"2018",
-    correctAnswer: "choice3"
+    choices:
+    [
+        "2001",
+        "2008",
+        "2015",
+        "2018",
+    ],
+    correctAnswer: 2
     },
     {question:"Within the second argument of a .eventListener(), the function has an argument of (e) because...",
-    choice1:"it actually doesn't need to be (e), it could be anything, such as (Farley)",
-    choice2:"because it represents an event",
-    choice3:"it specifies ES6",
-    choice4:"because it is an empty value",
-    correctAnswer: "choice1"
+    choices:
+    [
+        "it actually doesn't need to be (e), it could be anything, such as (Farley)",
+        "it represents an event",
+        "it specifies ES6",
+        "because it is an empty value"
+    ],
+    correctAnswer: 0
     },
     {question:"the smallest time interval allowed for the second argument of setInterval is ...",
-    choice1:".5 milliseconds",
-    choice2:"1 milliseconds",
-    choice3:"5 milliseconds",
-    choice4:"10 milliseconds",
-    correctAnswer: "choice4"
+    choices:
+    [
+        ".5 milliseconds",
+        "1 milliseconds",
+        "5 milliseconds",
+        "10 milliseconds"
+    ],
+    correctAnswer: 3
+  
     }
-    
+
 
 
 ]
@@ -113,12 +138,18 @@ function renderQuestion(){
     question[0].textContent = questions[0].question
 }
 function renderChoices(){
-    for(var i = 0; i < questions[currentQuestion].choices.length; i++)
-    document.getElementsByClassName("choice"+(i+1))[0].textContent = questions[currentQuestion].choices[i]
+    for(var i = 0; i < questions[currentQuestion].choices.length; i++){
+    var element = document.createElement("div")
+    element.className = "choice"
+    element.textContent = questions[0].choices[i]
+    document.getElementById("choices").appendChild(element)
+    }
+
+
     // document.getElementsByClassName("choice2")[0].textContent = questions[0].choice2
     // document.getElementsByClassName("choice3")[0].textContent = questions[0].choice3
     // document.getElementsByClassName("choice4")[0].textContent = questions[0].choice4
-    
+
 }
 //start quiz button
 document.getElementById("start-quiz-button").addEventListener("click", function (){
@@ -132,6 +163,14 @@ document.getElementById("back-to-start").addEventListener("click", function(){
     currentPage = "opening-page"
     rednerCurrentPage()
 })
+//next question button
+document.getElementById("next-button").addEventListener("click", function(){
+
+})
+//event listener for choices
+
+    
+
 // clearOpeningPage()
 clearOpeningPage()
 clearQuizPage()
@@ -139,3 +178,17 @@ rednerCurrentPage()
 renderQuestion()
 renderChoices()
 
+var choiceEvents = document.getElementsByClassName("choice")
+console.log(choiceEvents[3])
+for(var i = 0; i< choiceEvents.length; i++){
+    choiceEvents[i].addEventListener("click", function(){
+
+        if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
+            console.log("correct")
+        }else {
+            console.log("incorrect")
+        }
+    })
+
+    
+}

@@ -76,7 +76,17 @@ body{
 }
 .choice{
     border: 5px solid black;
+    height: fit-content
 }
 .choice:hover{
     background-color: gray;
+}
+#next-button-box{
+    display: flex;
+    justify-content: center;
+}
+#next-button{
+    width: 100px;
+    height: 50px;
+    background-color: green;
 }
