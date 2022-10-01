@@ -1,13 +1,26 @@
 
 
-var currentPage = "opening-page"
+var currentPage = "quiz-page"
 var currentPageDisplay = "inline"
+var openingPage = {
+    display:"inline"
+}
+var quizPage = {
+    display:"inline"
+}
+var currentQuestion = 0
 var questions = [
     {question:"What year was JavaScript created?",
-    choice1:"1994",
-    choice2:"1995",
-    choice3:"1998",
-    choice4:"1999",
+    choices:[
+        1994,
+        1995,
+        1998,
+        1999
+    ],
+    // choice1:"1994",
+    // choice2:"1995",
+    // choice3:"1998",
+    // choice4:"1999",
     correctAnswer: "choice2"
     },
     {question:"What character is used to separate a key from a value within an object in JavaScript?",
@@ -77,7 +90,7 @@ var questions = [
 
 
 ]
-console.log(questions[1].choice4)
+
 //for changing to next page
 function rednerCurrentPage(){
     document.getElementById(currentPage).style.display = currentPageDisplay
@@ -95,6 +108,18 @@ function clearOpeningPage(){
 function clearQuizPage(){
     document.getElementById("quiz-page").style.display = "none"
 }
+function renderQuestion(){
+    var question = document.getElementsByClassName("question")
+    question[0].textContent = questions[0].question
+}
+function renderChoices(){
+    for(var i = 0; i < questions[currentQuestion].choices.length; i++)
+    document.getElementsByClassName("choice"+(i+1))[0].textContent = questions[currentQuestion].choices[i]
+    // document.getElementsByClassName("choice2")[0].textContent = questions[0].choice2
+    // document.getElementsByClassName("choice3")[0].textContent = questions[0].choice3
+    // document.getElementsByClassName("choice4")[0].textContent = questions[0].choice4
+    
+}
 //start quiz button
 document.getElementById("start-quiz-button").addEventListener("click", function (){
     clearCurrentPage()
@@ -110,5 +135,7 @@ document.getElementById("back-to-start").addEventListener("click", function(){
 // clearOpeningPage()
 clearOpeningPage()
 clearQuizPage()
-renderOpeningPage()
+rednerCurrentPage()
+renderQuestion()
+renderChoices()
 
