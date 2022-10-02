@@ -56,6 +56,17 @@ body{
     /* border: 5px solid black; */
     padding: 10px;
 }
+#quiz-page{
+    display: flex;
+    height: 600px
+}
+#timer{
+    border: 5px solid black;
+    height: 100px;
+    width: 100px;
+    float: right;
+    
+}
 .question-div{
     display: flex;
     position: relative;
@@ -91,6 +102,32 @@ body{
     height: 50px;
     background-color: green;
 }
+#post-quiz-page{
+    display: flex;
+   
+    background-color: green;
+    display: flex;
+    height: 600px
+
+}
 #current-score{
+    position: absolute;
     border: 5px solid black;
+    text-align: center;
+    top: 105px
+    
+}
+#post-quiz-score-header{
+    color: red;
+    
+}
+#correct-answers-score{
+    position: relative;
+}
+#post-quiz-timer{
+    position: relative;
+    border: 5px solid black;
+    height: 100px;
+    width: 100px;
+    float: right;
 }

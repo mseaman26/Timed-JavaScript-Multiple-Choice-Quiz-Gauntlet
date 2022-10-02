@@ -13,7 +13,7 @@ var pageObjects = [{
 }
 ]
 var currentPage = 0
-var currentPageDisplay = "inline"
+// var currentPageDisplay = "inline"
 
 var currentQuestion = 0
 var questions = [
@@ -122,9 +122,12 @@ var questions = [
 
 
 ]
-currentQuestionAnswered = false
-var correctAnswers = 0
-var incorrectAnswers = 0
+var currentQuestionAnswered = false
+var correctAnswers =0
+var incorrectAnswers =0
+
+var timeRemaining
+var timerGoing = false
 //for changing to next page
 function rednerCurrentPage(){
     document.getElementById(pageObjects[currentPage].name).style.display = pageObjects[currentPage].display
@@ -142,18 +145,11 @@ function clearAllPages(){
 function renderOpeningPage(){
     document.getElementById("opening-page").style.display = "inline"
 }
-// function renderOpeningPageNew(){
-//     var body = document.getElementById("body")
-//     var startQuizButton = document.createElement("div")
-//     startQuizButton.setAttribute("id", "start-quiz-button")
-//     body.appendChild(startQuizButton)
-// }
+
 function clearOpeningPage(){
    document.getElementById("opening-page").style.display = "none";
 }
-function clearQuizPage(){
-    document.getElementById("quiz-page").style.display = "none"
-}
+
 function renderQuestion(){
     var question = document.getElementsByClassName("question")
     question[0].textContent = questions[currentQuestion].question
@@ -180,8 +176,41 @@ function startquiz(){
     renderChoices()
     activateChoices()
 }
-function clearPage(){
-    document.getElementById("body").innerHTML = ''
+// function clearPage(){
+//     document.getElementById("body").innerHTML = ''
+// }
+//activates choices as correct or incorrect
+function activateChoices(){
+    currentQuestionAnswered = false
+    nexQuestionButton.style.display = "none"
+    var choiceEvents = document.getElementsByClassName("choice")
+    for(var i = 0; i< choiceEvents.length; i++){
+    choiceEvents[i].addEventListener("click", function(){
+        if(currentQuestionAnswered == false){
+            if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
+                console.log("correct")
+                correctAnswers = correctAnswers+1
+            }else {
+                console.log("incorrect")
+                incorrectAnswers = incorrectAnswers+1
+            }
+        }
+        currentQuestionAnswered = true
+        nexQuestionButton.style.display = "flex"
+    }
+    )
+    }
+    
+}
+function startTimer(){
+    var timer = setInterval(function(){
+            document.getElementById("timer").textContent = timeRemaining
+            timeRemaining -= 1
+            if(timerGoing = false || timeRemaining < 0){
+                clearInterval(timer)
+                console.log("less than")
+            } 
+        }, 1000)
 }
 //start quiz button
 document.getElementById("start-quiz-button").addEventListener("click", function (){
@@ -189,6 +218,9 @@ document.getElementById("start-quiz-button").addEventListener("click", function 
     currentPage = 1
     startquiz()
     console.log("start")
+    timeRemaining =75
+    timerGoing = true
+    startTimer()
 })
 //back to start button
 document.getElementById("back-to-start").addEventListener("click", function(){
@@ -198,9 +230,11 @@ document.getElementById("back-to-start").addEventListener("click", function(){
     rednerCurrentPage()
     correctAnswers = 0;
     incorrectAnswers = 0
+    timerGoing = false
 })
 //next question button
 var nexQuestionButton = document.getElementById("next-button")
+
 nexQuestionButton.addEventListener("click", function(){
     
     currentQuestion = currentQuestion + 1
@@ -215,52 +249,31 @@ nexQuestionButton.addEventListener("click", function(){
         console.log("corect answers: "+correctAnswers)
         console.log("incorrect answers: "+incorrectAnswers)
         clearAllPages()
-        currentPage = 2
-        clearAllPages()
+        currentPage = 2 //post quiz page
         rednerCurrentPage()
+        timerGoing = false
+        localStorage.setItem("correct-answers", JSON.stringify(correctAnswers))
+        localStorage.setItem("incorrect-answers", JSON.stringify(incorrectAnswers))
+        localStorage.setItem("time-remaining", JSON.stringify(timeRemaining))
+     
+
     }
     
 })
-//event listener for choices
+//===================================POST QUIZ PAGE======================================================
+var correctScoreBoard = document.getElementById("correct-answers-score")
+correctScoreBoard.textContent = "Correct Answers: "+localStorage.getItem("correct-answers")
 
-    
+var postTimer = document.getElementById("post-quiz-timer")
+postTimer.textContent = localStorage.getItem("time-remaining")
 
-// clearOpeningPage()
-// clearOpeningPage()
-// clearQuizPage()
+var incorrectScoreBoard = document.getElementById("incorrect-answers-score")
+incorrectScoreBoard.textContent = "Incorrect Answers: "+localStorage.getItem("incorrect-answers")
+
+
 clearAllPages()
 rednerCurrentPage()
-renderQuestion()
-renderChoices()
-//activates choices as correct or incorrect
-function activateChoices(){
-    currentQuestionAnswered = false
-    nexQuestionButton.style.display = "none"
-    var choiceEvents = document.getElementsByClassName("choice")
-    for(var i = 0; i< choiceEvents.length; i++){
-    choiceEvents[i].addEventListener("click", function(){
-        if(currentQuestionAnswered == false){
-            if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
-                console.log("correct")
-                correctAnswers += 1
-            }else {
-                console.log("incorrect")
-                incorrectAnswers += 1
-            }
-        }
-        currentQuestionAnswered = true
-        nexQuestionButton.style.display = "flex"
-    }
-    )
-    }
-    
-}
 
 
-// document.addEventListener("keydown", function (e){
-//     if(e.key == "c"){
-//         clearPage()
-//     } else if (e.key == "o"){
-//         renderOpeningPageNew()
-//     }
-// })
+
+
