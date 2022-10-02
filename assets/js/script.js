@@ -12,7 +12,7 @@ var pageObjects = [{
     display: "inline"
 }
 ]
-var currentPage = 0
+var currentPage = 2
 // var currentPageDisplay = "inline"
 
 var currentQuestion = 0
@@ -190,9 +190,11 @@ function activateChoices(){
             if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
                 console.log("correct")
                 correctAnswers = correctAnswers+1
+                
             }else {
                 console.log("incorrect")
                 incorrectAnswers = incorrectAnswers+1
+                timeRemaining -= 5
             }
         }
         currentQuestionAnswered = true
@@ -207,11 +209,50 @@ function startTimer(){
             document.getElementById("timer").textContent = timeRemaining
             timeRemaining -= 1
             if(timerGoing = false || timeRemaining < 0){
+                
                 clearInterval(timer)
                 console.log("less than")
             } 
         }, 1000)
 }
+function renderPostQuizPage(){
+    console.log("end of quiz")
+    console.log("corect answers: "+correctAnswers)
+    console.log("incorrect answers: "+incorrectAnswers)
+    clearAllPages()
+    currentPage = 2 //post quiz page
+    rednerCurrentPage()
+    timerGoing = false
+    localStorage.setItem("correct-answers", JSON.stringify(correctAnswers))
+    localStorage.setItem("incorrect-answers", JSON.stringify(incorrectAnswers))
+    localStorage.setItem("time-remaining", JSON.stringify(timeRemaining))
+
+    var correctScoreBoard = document.getElementById("correct-answers-score")
+    var finalCorrectAnswers = localStorage.getItem("correct-answers")
+    correctScoreBoard.textContent = "Correct Answers: "+finalCorrectAnswers
+
+    var postTimer = document.getElementById("post-quiz-timer")
+    var finalTimeRemaining = localStorage.getItem("time-remaining")
+    if(finalTimeRemaining <= 0){
+        localStorage.setItem("time-remaining", "0")
+        finalTimeRemaining = 0
+        }
+    postTimer.textContent = finalTimeRemaining
+
+    var incorrectScoreBoard = document.getElementById("incorrect-answers-score")
+    var finalIncorrectAnswers = localStorage.getItem("incorrect-answers")
+    incorrectScoreBoard.textContent = "Incorrect Answers: "+finalIncorrectAnswers
+
+    var percentageScore = document.getElementById("percentage-score")
+    percentageScore.textContent = "Your answers were "+finalCorrectAnswers/10*100+"% correct!"
+
+    var timeRemainingScore = document.getElementById("time-remaining")
+    timeRemainingScore.textContent = "Your remaining time was "+finalTimeRemaining+" seconds"
+
+    var finalScoreEl = document.getElementById("final-score")
+    var finalScore = Math.floor(finalCorrectAnswers/10*finalTimeRemaining)
+    finalScoreEl.textContent = finalCorrectAnswers/10*100+"% of "+finalTimeRemaining+" is "+finalScore+"!  That's your final score!"
+    }
 //start quiz button
 document.getElementById("start-quiz-button").addEventListener("click", function (){
     clearAllPages()
@@ -245,30 +286,13 @@ nexQuestionButton.addEventListener("click", function(){
         activateChoices()
     } else{
 //Enter Post Quiz
-        console.log("end of quiz")
-        console.log("corect answers: "+correctAnswers)
-        console.log("incorrect answers: "+incorrectAnswers)
-        clearAllPages()
-        currentPage = 2 //post quiz page
-        rednerCurrentPage()
-        timerGoing = false
-        localStorage.setItem("correct-answers", JSON.stringify(correctAnswers))
-        localStorage.setItem("incorrect-answers", JSON.stringify(incorrectAnswers))
-        localStorage.setItem("time-remaining", JSON.stringify(timeRemaining))
-     
+    renderPostQuizPage()
 
     }
     
 })
-//===================================POST QUIZ PAGE======================================================
-var correctScoreBoard = document.getElementById("correct-answers-score")
-correctScoreBoard.textContent = "Correct Answers: "+localStorage.getItem("correct-answers")
 
-var postTimer = document.getElementById("post-quiz-timer")
-postTimer.textContent = localStorage.getItem("time-remaining")
 
-var incorrectScoreBoard = document.getElementById("incorrect-answers-score")
-incorrectScoreBoard.textContent = "Incorrect Answers: "+localStorage.getItem("incorrect-answers")
 
 
 clearAllPages()
