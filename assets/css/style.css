@@ -6,6 +6,10 @@ body{
     background-repeat: repeat-y;
     background-size: cover; */
 }
+#opening-page{
+    display: flex;
+    align-items: center;
+}
 #view-high-scores{
     display: flex;
     background-color: black;
@@ -17,9 +21,7 @@ body{
     
     
 }
-#openingPage{
 
-}
 #title-container{
     display: flex;
     flex-direction: column;
@@ -104,17 +106,16 @@ body{
 }
 #post-quiz-page{
     display: flex;
-   
     background-color: green;
-    display: flex;
     height: 600px
 
 }
 #current-score{
-    position: absolute;
+    position: relative;
     border: 5px solid black;
     text-align: center;
-    top: 105px
+    top: 105px;
+    width: 80%
     
 }
 #post-quiz-score-header{
@@ -130,4 +131,17 @@ body{
     height: 100px;
     width: 100px;
     float: right;
+}
+#initials-form{
+    position: relative;
+    height: 20px;
+    width: 100px;
+}
+#initials-form{
+    position: relative;
+    background-color: purple;
+}
+#textarea{
+    position: relative;
+    
 }

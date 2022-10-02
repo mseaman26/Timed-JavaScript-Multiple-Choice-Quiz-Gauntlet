@@ -13,7 +13,7 @@ var pageObjects = [{
 }
 ]
 var currentPage = 0
-// var currentPageDisplay = "inline"
+
 
 var currentQuestion = 0
 var questions = [
@@ -132,9 +132,6 @@ var timerGoing = false
 function rednerCurrentPage(){
     document.getElementById(pageObjects[currentPage].name).style.display = pageObjects[currentPage].display
 }
-function clearCurrentPage(){
-    document.getElementById(currentPage).style.display = "none"
-}
 function clearAllPages(){
     document.getElementById("opening-page").style.display = "none"
     document.getElementById("quiz-page").style.display = "none"
@@ -146,23 +143,18 @@ function renderOpeningPage(){
     document.getElementById("opening-page").style.display = "inline"
 }
 
-function clearOpeningPage(){
-   document.getElementById("opening-page").style.display = "none";
-}
-
 function renderQuestion(){
     var question = document.getElementsByClassName("question")
     question[0].textContent = questions[currentQuestion].question
-    
-    
 }
-
+//displays the choices for each question
 function renderChoices(){
     document.getElementById("choices").innerHTML = ""
     for(var i = 0; i < questions[currentQuestion].choices.length; i++){
     var element = document.createElement("div")
+    element.id = "choice"+i
     element.className = "choice"
-    element.textContent = questions[currentQuestion].choices[i]
+    element.textContent = (i+1)+") "+questions[currentQuestion].choices[i]
     document.getElementById("choices").appendChild(element)
     nexQuestionButton.style.display = "flex"
     }
@@ -182,23 +174,41 @@ function startquiz(){
 //activates choices as correct or incorrect
 function activateChoices(){
     currentQuestionAnswered = false
+    //hide next question button initially
     nexQuestionButton.style.display = "none"
     var choiceEvents = document.getElementsByClassName("choice")
     for(var i = 0; i< choiceEvents.length; i++){
-    choiceEvents[i].addEventListener("click", function(){
+        choiceEvents[i].addEventListener("click", function(){
+             //When answer is clicked
         if(currentQuestionAnswered == false){
-            if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
-                console.log("correct")
+            //if answer is correct
+            if(this.textContent.includes(questions[currentQuestion].choices[questions[currentQuestion].correctAnswer])){
+                this.style.backgroundColor = "green"
                 correctAnswers = correctAnswers+1
                 
             }else {
-                console.log("incorrect")
+                this.style.backgroundColor = "red"
                 incorrectAnswers = incorrectAnswers+1
                 timeRemaining -= 5
             }
+              //highlighting right answer after choice is made
+            currentQuestionAnswered = true
+            for(var i = 0; i< choiceEvents.length; i++){
+                var answer = document.getElementById("choice"+i) 
+                console.log(answer.id)
+                console.log("choice"+questions[currentQuestion].correctAnswer)
+                // if(answer.textContent.includes(JSON.stringify(questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]))){
+                    if(answer.id == "choice"+questions[currentQuestion].correctAnswer){
+                    answer.style.backgroundColor = "green"
+                }
         }
-        currentQuestionAnswered = true
+        //reveal next question button
         nexQuestionButton.style.display = "flex"
+
+        }
+      
+       
+        
     }
     )
     }
@@ -211,14 +221,11 @@ function startTimer(){
             if(timerGoing = false || timeRemaining < 0){
                 
                 clearInterval(timer)
-                console.log("less than")
             } 
         }, 1000)
 }
+//=========================================POST QUIZ PAGE===============================
 function renderPostQuizPage(){
-    console.log("end of quiz")
-    console.log("corect answers: "+correctAnswers)
-    console.log("incorrect answers: "+incorrectAnswers)
     clearAllPages()
     currentPage = 2 //post quiz page
     rednerCurrentPage()
@@ -251,19 +258,21 @@ function renderPostQuizPage(){
 
     var finalScoreEl = document.getElementById("final-score")
     var finalScore = Math.floor(finalCorrectAnswers/10*finalTimeRemaining)
-    finalScoreEl.textContent = finalCorrectAnswers/10*100+"% of "+finalTimeRemaining+" is "+finalScore+"!  That's your final score!"
+    finalScoreEl.textContent = finalCorrectAnswers/10*100+"% of "+finalTimeRemaining+" is "+finalScore+"!  "+finalScore+" is your final score!"
     }
-//start quiz button
+
+//=======================EVENT LISTENERS==================================
+
+//start quiz button listener
 document.getElementById("start-quiz-button").addEventListener("click", function (){
     clearAllPages()
     currentPage = 1
     startquiz()
-    console.log("start")
     timeRemaining =75
     timerGoing = true
     startTimer()
 })
-//back to start button
+//back to start button listener
 document.getElementById("back-to-start").addEventListener("click", function(){
     clearAllPages()
     currentQuestion = 0;
@@ -273,28 +282,32 @@ document.getElementById("back-to-start").addEventListener("click", function(){
     incorrectAnswers = 0
     timerGoing = false
 })
-//next question button
+//next question button listener
 var nexQuestionButton = document.getElementById("next-button")
-
+//Next questions button listener
 nexQuestionButton.addEventListener("click", function(){
     
     currentQuestion = currentQuestion + 1
-    console.log(currentQuestion)
     if(questions[currentQuestion] !== undefined){
         renderQuestion()
         renderChoices()
         activateChoices()
     } else{
-//Enter Post Quiz
-    renderPostQuizPage()
 
+    renderPostQuizPage()
     }
-    
+})
+//initials form listeners
+var initialsTextBox = document.getElementById("initials-text-box")
+var submitButton = document.getElementById("submit-button")
+
+submitButton.addEventListener("Click", function(event){
+    event.preventDefault();
 })
 
 
 
-
+//=========================First Code Executed=============================
 clearAllPages()
 rednerCurrentPage()
 
