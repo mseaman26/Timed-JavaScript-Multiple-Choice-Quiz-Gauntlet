@@ -12,7 +12,7 @@ var pageObjects = [{
     display: "inline"
 }
 ]
-var currentPage = 2
+var currentPage = 0
 // var currentPageDisplay = "inline"
 
 var currentQuestion = 0
