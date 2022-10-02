@@ -91,3 +91,6 @@ body{
     height: 50px;
     background-color: green;
 }
+#current-score{
+    border: 5px solid black;
+}

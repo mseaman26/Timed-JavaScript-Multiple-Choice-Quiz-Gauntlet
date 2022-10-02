@@ -1,13 +1,20 @@
 
-
-var currentPage = "opening-page"
+var pageObjects = [{
+    name:"opening-page",
+    display:"inline"
+},
+{
+    name: "quiz-page",
+    display:"inline"
+},
+{
+    name: 'post-quiz-page',
+    display: "inline"
+}
+]
+var currentPage = 0
 var currentPageDisplay = "inline"
-var openingPage = {
-    display:"inline"
-}
-var quizPage = {
-    display:"inline"
-}
+
 var currentQuestion = 0
 var questions = [
     {question:"What year was JavaScript created?",
@@ -115,18 +122,32 @@ var questions = [
 
 
 ]
-
+currentQuestionAnswered = false
+var correctAnswers = 0
+var incorrectAnswers = 0
 //for changing to next page
 function rednerCurrentPage(){
-    document.getElementById(currentPage).style.display = currentPageDisplay
+    document.getElementById(pageObjects[currentPage].name).style.display = pageObjects[currentPage].display
 }
 function clearCurrentPage(){
     document.getElementById(currentPage).style.display = "none"
 }
+function clearAllPages(){
+    document.getElementById("opening-page").style.display = "none"
+    document.getElementById("quiz-page").style.display = "none"
+    document.getElementById("post-quiz-page").style.display = "none"
 
+    
+}
 function renderOpeningPage(){
     document.getElementById("opening-page").style.display = "inline"
 }
+// function renderOpeningPageNew(){
+//     var body = document.getElementById("body")
+//     var startQuizButton = document.createElement("div")
+//     startQuizButton.setAttribute("id", "start-quiz-button")
+//     body.appendChild(startQuizButton)
+// }
 function clearOpeningPage(){
    document.getElementById("opening-page").style.display = "none";
 }
@@ -136,6 +157,8 @@ function clearQuizPage(){
 function renderQuestion(){
     var question = document.getElementsByClassName("question")
     question[0].textContent = questions[currentQuestion].question
+    
+    
 }
 
 function renderChoices(){
@@ -145,75 +168,99 @@ function renderChoices(){
     element.className = "choice"
     element.textContent = questions[currentQuestion].choices[i]
     document.getElementById("choices").appendChild(element)
+    nexQuestionButton.style.display = "flex"
     }
 }
 function startquiz(){
-    clearOpeningPage()
+    clearAllPages()
     currentQuestion = 0
-    currentPage = "quiz-page"
-    clearQuizPage()
+    currentPage = 1
     rednerCurrentPage()
-    renderQuestion()
-    renderChoices()
-}
-//start quiz button
-document.getElementById("start-quiz-button").addEventListener("click", function (){
-    startquiz()
-})
-//back to start button
-document.getElementById("back-to-start").addEventListener("click", function(){
-    clearCurrentPage()
-    currentQuestion = 0;
-    currentPage = "opening-page"
-    rednerCurrentPage()
-})
-//next question button
-document.getElementById("next-button").addEventListener("click", function(){
-    currentQuestion = currentQuestion + 1
-    console.log(currentQuestion)
     renderQuestion()
     renderChoices()
     activateChoices()
+}
+function clearPage(){
+    document.getElementById("body").innerHTML = ''
+}
+//start quiz button
+document.getElementById("start-quiz-button").addEventListener("click", function (){
+    clearAllPages()
+    currentPage = 1
+    startquiz()
+    console.log("start")
+})
+//back to start button
+document.getElementById("back-to-start").addEventListener("click", function(){
+    clearAllPages()
+    currentQuestion = 0;
+    currentPage = 0
+    rednerCurrentPage()
+    correctAnswers = 0;
+    incorrectAnswers = 0
+})
+//next question button
+var nexQuestionButton = document.getElementById("next-button")
+nexQuestionButton.addEventListener("click", function(){
+    
+    currentQuestion = currentQuestion + 1
+    console.log(currentQuestion)
+    if(questions[currentQuestion] !== undefined){
+        renderQuestion()
+        renderChoices()
+        activateChoices()
+    } else{
+//Enter Post Quiz
+        console.log("end of quiz")
+        console.log("corect answers: "+correctAnswers)
+        console.log("incorrect answers: "+incorrectAnswers)
+        clearAllPages()
+        currentPage = 2
+        clearAllPages()
+        rednerCurrentPage()
+    }
+    
 })
 //event listener for choices
 
     
 
 // clearOpeningPage()
-clearOpeningPage()
-clearQuizPage()
+// clearOpeningPage()
+// clearQuizPage()
+clearAllPages()
 rednerCurrentPage()
 renderQuestion()
 renderChoices()
-
-var choiceEvents = document.getElementsByClassName("choice")
-console.log(choiceEvents[3])
-for(var i = 0; i< choiceEvents.length; i++){
-    choiceEvents[i].addEventListener("click", function(){
-
-        if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
-            console.log("correct")
-        }else {
-            console.log("incorrect")
-        }
-    })
-
-    
-}
+//activates choices as correct or incorrect
 function activateChoices(){
+    currentQuestionAnswered = false
+    nexQuestionButton.style.display = "none"
     var choiceEvents = document.getElementsByClassName("choice")
-console.log(choiceEvents[3])
-for(var i = 0; i< choiceEvents.length; i++){
+    for(var i = 0; i< choiceEvents.length; i++){
     choiceEvents[i].addEventListener("click", function(){
-
-        if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
-            console.log("correct")
-        }else {
-            console.log("incorrect")
+        if(currentQuestionAnswered == false){
+            if(this.textContent == questions[currentQuestion].choices[questions[currentQuestion].correctAnswer]){
+                console.log("correct")
+                correctAnswers += 1
+            }else {
+                console.log("incorrect")
+                incorrectAnswers += 1
+            }
         }
-    })
-
+        currentQuestionAnswered = true
+        nexQuestionButton.style.display = "flex"
+    }
+    )
+    }
     
 }
 
-}
+
+// document.addEventListener("keydown", function (e){
+//     if(e.key == "c"){
+//         clearPage()
+//     } else if (e.key == "o"){
+//         renderOpeningPageNew()
+//     }
+// })
