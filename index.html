@@ -15,7 +15,7 @@
         <div id="title-container">
             <div id="title-blurb">
                 <h1>Welcome to the JavaScript Speed Quiz!!</h1>
-                <p>This quiz is designed to make you sweat. Not only will your knowledge be put to the test, but you'll be timed as well!  The percentage of questions you get right will be multiplied by the time you are left with! Incorrect answers will deduct 5 seconds from the time remaining. Good Luck!
+                <p>This quiz is designed to make you sweat. Not only will your knowledge be put to the test, but you'll be timed as well!  The percentage of questions you get right will be multiplied by the time you are left with at the end! Incorrect answers will deduct 5 seconds from the time remaining, which makes them DOUBLE PUNISHING!. Good Luck!
                 </p>
             </div>
             <button id="start-quiz-button">
@@ -28,12 +28,18 @@
         <button id="back-to-start">
             back to start, but come on, that's cheating
         </button>
-        <div id="timer"></div>
+        <h2 id="timer-header">Timer:</h2>
+        <div id="timer">
+            <p id="time"></p>
+        </div>
         <div class="question-div">
             <div class="question-box">
                 <div class="question">question</div>
                 <div id="choices">
-                    choice
+                    <div class="choice">choice</div>
+                </div>
+                <div id="choice-result">
+                    incorrect
                 </div>
                 <div id="next-button-box">
                     <button id="next-button">Next Question</button>
@@ -42,22 +48,31 @@
         </div>
     </div>
     <div id="post-quiz-page">
-        <div id="post-quiz-timer"></div>
+        <button id="view-high-scores-post">Click Here to view the High scores!</button>
+        <h2 id="post-timer-header">Timer:</h2>
+        <div id="post-quiz-timer">
+            <p id="time-post">00</p>
+        </div>
         <div id="current-score">
-            <h1 id="post-quiz-score-header">You're done! here's your results</h1>
+            <h1 id="post-quiz-score-header">You're done! here are your results</h1>
             <p id="correct-answers-score">correct answers</p>
             <p id="incorrect-answers-score">incorrect answers</p>
             <p id="percentage-score">percentage</p>
             <p id="time-remaining">time remaining</p>
             <p id="final-score">final score</p>
         </div>
-        <form id="initials-form">
-            <textarea id="initials-text-box" placeholder="Enter your initials here" ></textarea>
-            <div>
+        <div id="enter-initals">
+            <h3 id="initials-header">Enter your initials below to have your score logged in the record book!</h3>
+            <form id="initials-form">
+                <input type="text" rows="1" width=50px id="initials-text-box" placeholder="" ></input>
                 <button id="submit-button">Submit</button>
-            </div>
-        </form>
-    
+            </form>
+        </div>
+     </div> 
+     <div id="high-scores-page">
+        <H1>Here are the all-time high scores!!</H1>
+        <div id="high-scores-div"></div>
+     </div>  
     <script src="./assets/js/script.js"></script>
 
 </body>
