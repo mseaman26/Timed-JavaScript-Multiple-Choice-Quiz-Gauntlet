@@ -238,7 +238,7 @@ function startTimer(){
             document.getElementById("time").textContent = timeRemaining
             timeRemaining -= 1
             if(timerGoing = false || timeRemaining < 0){
-                
+                renderPostQuizPage()
                 clearInterval(timer)
             } 
         }, 1000)
@@ -258,23 +258,49 @@ function sortScores(array){
 //TODO: cant make play again button work.  maybe because it's created dynamically
 function displayHighScores(){
     var scoresH1 = document.createElement("h1")
-    scoresH1.textContent = "Here are the all-time High Scores!"
+    scoresH1.textContent = "Here are the all-time High Scores! Reload the page to play again!!!"
     document.getElementById("high-scores-page").appendChild(scoresH1)
-    var playAgainButton = document.createElement("button")
-    playAgainButton.id = "play-again-button"
-    playAgainButton.textContent = "Play Again"
-    document.getElementById("high-scores-page").appendChild(playAgainButton)
+    // var playAgainButton = document.createElement("button")
+    // playAgainButton.id = "play-again-button"
+    // playAgainButton.textContent = "Play Again"
+    // document.getElementById("high-scores-page").appendChild(playAgainButton)
     
-    console.log(scores.length+" is the number of scores")
-    for(var i = 0; i < scores.length;i++){
-        var pEl = document.createElement("p")
-        pEl.textContent = (scores[i].name+":"+" "+scores[i].score)
-        document.getElementById("high-scores-page").appendChild(pEl)
-    }
-    document.getElementById("play-again-button").addEventListener("click", function(){
-        currentPage = 0
-        rednerCurrentPage
-})
+    var table = document.createElement('table');
+    table.id = "score-table"
+    var header = table.createTHead()
+    var row = header.insertRow(0)
+    var cell1 = row.insertCell(0)
+    var cell2 = row.insertCell(0)
+    cell1.innerHTML = "NAME:"
+    cell2.innerHTML = "SCORE:"
+    for (var i = 1; i < scores.length; i++){
+        var tr = document.createElement('tr');   
+
+        var td1 = document.createElement('td');
+        var td2 = document.createElement('td');
+
+        var text1 = document.createTextNode(scores[i].name);
+        var text2 = document.createTextNode(scores[i].score);
+
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
+}
+        document.body.appendChild(table);
+
+
+    // for(var i = 0; i < scores.length;i++){
+    //     var pEl = document.createElement("p")
+    //     pEl.textContent = (scores[i].name+":"+" "+scores[i].score)
+    //     document.getElementById("high-scores-page").appendChild(pEl)
+    // }
+//     document.getElementById("play-again-button").addEventListener("click", function(){
+//         currentPage = 0
+//         rednerCurrentPage
+// })
 }   
 //=========================================POST QUIZ PAGE===============================
 function renderPostQuizPage(){
@@ -294,10 +320,11 @@ function renderPostQuizPage(){
     var postTime = document.getElementById("time-post")
     var finalTimeRemaining = localStorage.getItem("time-remaining")
     if(finalTimeRemaining <= 0){
+    
         localStorage.setItem("time-remaining", "0")
         finalTimeRemaining = 0
         }
-    finalTimeRemaining =eval(finalTimeRemaining)+1
+    finalTimeRemaining =eval(finalTimeRemaining)
     postTime.textContent = finalTimeRemaining
 
     var incorrectScoreBoard = document.getElementById("incorrect-answers-score")
@@ -324,7 +351,7 @@ document.getElementById("start-quiz-button").addEventListener("click", function 
     clearAllPages()
     currentPage = 1
     startquiz()
-    timeRemaining =75
+    timeRemaining =3
     timerGoing = true
     startTimer()
 })
