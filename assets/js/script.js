@@ -406,7 +406,7 @@ submitButton.addEventListener("click", function(event){
     currentPage = 3
     clearAllPages()
     rednerCurrentPage()
-    getScoreBoard()
+    scores = getScoreBoard()
     document.getElementById("high-scores-page").innerHTML = ""
     displayHighScores()
    
