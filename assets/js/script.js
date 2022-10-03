@@ -273,7 +273,7 @@ function displayHighScores(){
     var cell2 = row.insertCell(0)
     cell1.innerHTML = "NAME:"
     cell2.innerHTML = "SCORE:"
-    for (var i = 1; i < scores.length; i++){
+    for (var i = 0; i < scores.length; i++){
         var tr = document.createElement('tr');   
 
         var td1 = document.createElement('td');
