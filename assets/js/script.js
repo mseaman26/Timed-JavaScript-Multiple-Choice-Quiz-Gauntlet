@@ -33,25 +33,25 @@ var questions = [
     ],
     correctAnswer: 1
     },
-    {
-    question:"True or False: a variable declared inside a function declaration can be used anywhere by any other function",
-    choices:[
-        "True",
-        "False"
-    ],
-    correctAnswer: 1
-    },
-    {question:"What character is used to separate a key from a value within an object in JavaScript?",
-    choices:
-    [
-        ";",
-        ",",
-        ":",
-        "/"
-    ],
+    // {
+    // question:"True or False: a variable declared inside a function declaration can be used anywhere by any other function",
+    // choices:[
+    //     "True",
+    //     "False"
+    // ],
+    // correctAnswer: 1
+    // },
+    // {question:"What character is used to separate a key from a value within an object in JavaScript?",
+    // choices:
+    // [
+    //     ";",
+    //     ",",
+    //     ":",
+    //     "/"
+    // ],
 
-    correctAnswer: 2
-    },
+    // correctAnswer: 2
+    // },
     // {question:"Who is credited with creating JavaScript?",
     // choices:
     // [
@@ -256,9 +256,13 @@ function sortScores(array){
     
 }
 function displayHighScores(){
-    var scoresH1 = document.createComment("h1")
+    var scoresH1 = document.createElement("h1")
     scoresH1.textContent = "Here are the all-time High Scores!"
     document.getElementById("high-scores-page").appendChild(scoresH1)
+    var playAgainButton = document.createElement("button")
+    playAgainButton.id = "play-again-button"
+    playAgainButton.textContent = "Play Again"
+    document.getElementById("high-scores-page").appendChild(playAgainButton)
     
     console.log(scores.length+" is the number of scores")
     for(var i = 0; i < scores.length;i++){

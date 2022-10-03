@@ -236,3 +236,10 @@ body{
     color: white;
     vertical-align: top;
 }
+#play-again-button{
+    position: relative;
+    background-color: green;
+    font-size: 30px;
+    float: right;
+    top: -60px
+}
