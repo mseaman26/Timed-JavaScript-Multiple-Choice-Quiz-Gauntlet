@@ -255,6 +255,7 @@ function getScoreBoard(){
 function sortScores(array){
     
 }
+//TODO: cant make play again button work.  maybe because it's created dynamically
 function displayHighScores(){
     var scoresH1 = document.createElement("h1")
     scoresH1.textContent = "Here are the all-time High Scores!"
@@ -270,7 +271,11 @@ function displayHighScores(){
         pEl.textContent = (scores[i].name+":"+" "+scores[i].score)
         document.getElementById("high-scores-page").appendChild(pEl)
     }
-}
+    document.getElementById("play-again-button").addEventListener("click", function(){
+        currentPage = 0
+        rednerCurrentPage
+})
+}   
 //=========================================POST QUIZ PAGE===============================
 function renderPostQuizPage(){
     clearAllPages()
