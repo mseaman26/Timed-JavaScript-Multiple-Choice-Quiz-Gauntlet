@@ -252,6 +252,21 @@ function getScoreBoard(){
     console.log("scores from function: "+scores)
     return scores
 }
+function sortScores(array){
+    
+}
+function displayHighScores(){
+    var scoresH1 = document.createComment("h1")
+    scoresH1.textContent = "Here are the all-time High Scores!"
+    document.getElementById("high-scores-page").appendChild(scoresH1)
+    
+    console.log(scores.length+" is the number of scores")
+    for(var i = 0; i < scores.length;i++){
+        var pEl = document.createElement("p")
+        pEl.textContent = (scores[i].name+":"+" "+scores[i].score)
+        document.getElementById("high-scores-page").appendChild(pEl)
+    }
+}
 //=========================================POST QUIZ PAGE===============================
 function renderPostQuizPage(){
     clearAllPages()
@@ -388,6 +403,12 @@ submitButton.addEventListener("click", function(event){
     localStorage.setItem("score"+scoreIndex, JSON.stringify({name:initials,score:finalScore}))
     scoreIndex +=1
     localStorage.setItem("score-index", scoreIndex)
+    currentPage = 3
+    clearAllPages()
+    rednerCurrentPage()
+    getScoreBoard()
+    document.getElementById("high-scores-page").innerHTML = ""
+    displayHighScores()
    
 
 
