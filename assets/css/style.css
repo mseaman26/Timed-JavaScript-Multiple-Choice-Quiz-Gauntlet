@@ -268,3 +268,13 @@ left: 0px;
 #score-table td{
     border: 1px solid black
 }
+@media screen and (max-width: 768px) {
+    /* For elements that weren’t assigned width using a percentage, I used this method to make them fit nicely on a phone screen */
+    #post-quiz-page{
+        display: block;
+        
+    }
+    .project{
+        width: 90%;
+    }
+}

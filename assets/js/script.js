@@ -33,106 +33,106 @@ var questions = [
     ],
     correctAnswer: 1
     },
-    // {
-    // question:"True or False: a variable declared inside a function declaration can be used anywhere by any other function",
-    // choices:[
-    //     "True",
-    //     "False"
-    // ],
-    // correctAnswer: 1
-    // },
-    // {question:"What character is used to separate a key from a value within an object in JavaScript?",
-    // choices:
-    // [
-    //     ";",
-    //     ",",
-    //     ":",
-    //     "/"
-    // ],
+    {
+    question:"True or False: a variable declared inside a function declaration can be used anywhere by any other function",
+    choices:[
+        "True",
+        "False"
+    ],
+    correctAnswer: 1
+    },
+    {question:"What character is used to separate a key from a value within an object in JavaScript?",
+    choices:
+    [
+        ";",
+        ",",
+        ":",
+        "/"
+    ],
 
-    // correctAnswer: 2
-    // },
-    // {question:"Who is credited with creating JavaScript?",
-    // choices:
-    // [
-    //     "Douglas Crockford",
-    //     "Marc Andreessen",
-    //     "Sir Tim Berners-Lee",
-    //     "Brendan Eich"
-    // ],
-    // correctAnswer: 3
-    // },
-    // {question:"When a variable is declared within a function, it is called a...",
-    // choices:
-    // [
-    //     "Local Variable",
-    //     "Functional Variable",
-    //     "Global Variable",
-    //     "Node"
-    // ],
-    // correctAnswer: 0
-    // },
-    // {question:"Local Storage refers to storing data...",
-    // choices:
-    // [
-    //     "in the environment where the javascript is being written",
-    //     "within the user's browser",
-    //     "on a server located within 25 miles of the user",
-    //     "on a built-in hard drive"
-    // ],
-    // correctAnswer: 1
-    // },
-    // {question:"To stop a function within setInterval(), we call...",
-    // choices:
-    // [
-    //     "clearInterval",
-    //     "break",
-    //     "return",
-    //     "exit"
-    // ],
-    // correctAnswer: 0
-    // },
-    // {question:"the first two arguments of .addEventListener are ...",
-    // choices:
-    // [
-    //     "type, object",
-    //     "click, event",
-    //     "click, listener(function)",
-    //     "listener, type"
-    // ],
-    // correctAnswer: 2
-    // },
-    // {question:"The ES6 JavaScript update was released in the year ...",
-    // choices:
-    // [
-    //     "2001",
-    //     "2008",
-    //     "2015",
-    //     "2018",
-    // ],
-    // correctAnswer: 2
-    // },
-    // {question:"Within the second argument of a .eventListener(), the function has an argument of (e) because...",
-    // choices:
-    // [
-    //     "it actually doesn't need to be (e), it could be anything, such as (Farley)",
-    //     "it represents an event",
-    //     "it specifies ES6",
-    //     "because it is an empty value"
-    // ],
-    // correctAnswer: 0
-    // },
-    // {question:"the smallest time interval allowed for the second argument of setInterval is ...",
-    // choices:
-    // [
-    //     ".5 milliseconds",
-    //     "1 milliseconds",
-    //     "5 milliseconds",
-    //     "10 milliseconds"
-    // ],
-    // correctAnswer: 3
+    correctAnswer: 2
+    },
+    {question:"Who is credited with creating JavaScript?",
+    choices:
+    [
+        "Douglas Crockford",
+        "Marc Andreessen",
+        "Sir Tim Berners-Lee",
+        "Brendan Eich"
+    ],
+    correctAnswer: 3
+    },
+    {question:"When a variable is declared within a function, it is called a...",
+    choices:
+    [
+        "Local Variable",
+        "Functional Variable",
+        "Global Variable",
+        "Node"
+    ],
+    correctAnswer: 0
+    },
+    {question:"Local Storage refers to storing data...",
+    choices:
+    [
+        "in the environment where the javascript is being written",
+        "within the user's browser",
+        "on a server located within 25 miles of the user",
+        "on a built-in hard drive"
+    ],
+    correctAnswer: 1
+    },
+    {question:"To stop a function within setInterval(), we call...",
+    choices:
+    [
+        "clearInterval",
+        "break",
+        "return",
+        "exit"
+    ],
+    correctAnswer: 0
+    },
+    {question:"the first two arguments of .addEventListener are ...",
+    choices:
+    [
+        "type, object",
+        "click, event",
+        "click, listener(function)",
+        "listener, type"
+    ],
+    correctAnswer: 2
+    },
+    {question:"The ES6 JavaScript update was released in the year ...",
+    choices:
+    [
+        "2001",
+        "2008",
+        "2015",
+        "2018",
+    ],
+    correctAnswer: 2
+    },
+    {question:"Within the second argument of a .eventListener(), the function has an argument of (e) because...",
+    choices:
+    [
+        "it actually doesn't need to be (e), it could be anything, such as (Farley)",
+        "it represents an event",
+        "it specifies ES6",
+        "because it is an empty value"
+    ],
+    correctAnswer: 0
+    },
+    {question:"the smallest time interval allowed for the second argument of setInterval is ...",
+    choices:
+    [
+        ".5 milliseconds",
+        "1 milliseconds",
+        "5 milliseconds",
+        "10 milliseconds"
+    ],
+    correctAnswer: 3
   
-    // }
+    }
 
 
 
@@ -271,8 +271,8 @@ function displayHighScores(){
     var row = header.insertRow(0)
     var cell1 = row.insertCell(0)
     var cell2 = row.insertCell(0)
-    cell1.innerHTML = "NAME:"
-    cell2.innerHTML = "SCORE:"
+    cell1.innerHTML = "SCORE:"
+    cell2.innerHTML = "NAME:"
     for (var i = 0; i < scores.length; i++){
         var tr = document.createElement('tr');   
 
@@ -351,7 +351,7 @@ document.getElementById("start-quiz-button").addEventListener("click", function 
     clearAllPages()
     currentPage = 1
     startquiz()
-    timeRemaining =3
+    timeRemaining =100
     timerGoing = true
     startTimer()
 })
