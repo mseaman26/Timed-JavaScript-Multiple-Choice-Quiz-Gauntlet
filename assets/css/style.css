@@ -10,7 +10,7 @@ body{
     /* Keep in mind, display can only be changed in JS, under pageObjects */
     
     align-items: center;
-}
+}/*button to navigate to high scores page*/
 #view-high-scores{
     position: relative;
     display: flex;
@@ -23,9 +23,7 @@ body{
     vertical-align: top;
 
 }
-    /* div{
-        border: 5px solid black 
-    } */
+
 #title-container{
     display: flex;
     
@@ -61,7 +59,6 @@ body{
     border-radius: 25px;
     width: 50%;
     border-width: 5px;
-    /* border: 5px solid black; */
     padding: 10px;
 }
 #quiz-page{
@@ -93,7 +90,7 @@ body{
     right: 0px;
     border-radius: 25px;
     top:40px
-}
+}/*actual value of timer*/
 #timer p{
     position: relative;
     top: -10%;
@@ -101,9 +98,7 @@ body{
     font-size: 40px;
 }
 .question-div{
-    /* background-color: antiquewhite; */
     position: relative;
-    /* border: 1px solid black; */
     border-radius: 25px;
     text-align: center;
     top: 105px;
@@ -114,7 +109,6 @@ body{
     position: relative;
     height: fit-content;
     width: 100%;
-    /* border: 5px solid black; */
     height: 100%;
     top: -100px;
     left: 20px
@@ -130,6 +124,7 @@ body{
 #choices{
     padding-bottom: 25px;
 }
+/*individual question choices*/
 .choice{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -140,6 +135,7 @@ body{
     border: 1px solid black
     
 }
+/*correct or incorrect*/
 #choice-result{
     font-size: 30px;
 }
@@ -158,14 +154,10 @@ body{
 }
 #post-quiz-page{
     /* Keep in mind, display can only be changed in JS, under pageObjects */
-    
-    
     position: relative;
 }
 #current-score{
-    /* background-color: antiquewhite; */
     position: relative;
-    /* border: 1px solid black; */
     border-radius: 25px;
     text-align: center;
     top: -100px;
@@ -189,7 +181,6 @@ body{
 #post-quiz-timer{
     background-color: antiquewhite;
     position: absolute;
-    /* border: 1px solid black; */
     height: 100px;
     width: 100px;
     right: 0px;
@@ -209,10 +200,9 @@ body{
     position: relative;
     height: 20px;
     width: 100px;
-}
-#initials-form{
     position: relative;
 }
+
 #textarea{
     position: relative;
     top: 0px;
@@ -220,12 +210,10 @@ body{
     
 }
 #enter-initals{
-    
    position: relative;
    top: -328px;
-left: 0px;
-    /* border: 1px solid black; */
-    background-color: rgb(223, 223, 223);
+   left: 0px;
+   background-color: rgb(223, 223, 223);
    width: 22%;
    height: 193px;;
    padding-right: 5px;
@@ -236,26 +224,6 @@ left: 0px;
     position: relative;
     left: 10px;
     top: 0px;
-}
-#view-high-scores-post{
-    visibility: hidden;
-    display: none;
-    position: relative;
-    display: flex;
-    background-color: black;
-    width: 25%;
-    height: fit-content;
-    padding: 20px;
-    border-radius: 25px;
-    color: white;
-    vertical-align: top;
-}
-#play-again-button{
-    position: relative;
-    background-color: green;
-    font-size: 30px;
-    float: right;
-    top: -60px
 }
 #high-scores-page p{
     font-size: 40px;
@@ -268,7 +236,7 @@ left: 0px;
 #score-table td{
     border: 1px solid black
 }
-#test{
+#high-scores-button{
     position: relative;
     font-size: 30px;
     top: 20px;

@@ -16,14 +16,15 @@ var pageObjects = [{
     display: "inline"
 }
 ]
-var test = document.getElementById("test")
+//button to navigate to high scores scoreboard
+var highScoresButton = document.getElementById("high-scores-button")
+//gets the scores from local storage
 var scores = getScoreBoard()
-console.log(scores)
-//selects page index
+//selects page index, for changing pages in the app
 var currentPage = 0//<-----------------------Select Page here (should be initialized to 0)
 //keeps track of what question we are on
 var currentQuestion = 0
-//The list of questions
+//The list of questions stored as objects in an array
 var questions = [
     {question:"What year was JavaScript created?",
     choices:[
@@ -143,6 +144,7 @@ var currentQuestionAnswered = false
 var correctAnswers =0
 var incorrectAnswers =0
 
+//timer value
 var timeRemaining
 var timerGoing = false
 var rightWrongDisplay = document.getElementById("choice-result")
@@ -174,7 +176,7 @@ function renderChoices(){
     document.getElementById("choices").appendChild(element)
     nexQuestionButton.style.display = "flex"
     }
-}
+}//begins the quiz
 function startquiz(){
     document.getElementById("timer")
     clearAllPages()
@@ -185,10 +187,7 @@ function startquiz(){
     renderChoices()
     activateChoices()
 }
-// function clearPage(){
-//     document.getElementById("body").innerHTML = ''
-// }
-//activates choices as correct or incorrect
+//loads the info to know which answers are correct and which are not
 function activateChoices(){
     rightWrongDisplay.textContent = ""
     currentQuestionAnswered = false
@@ -243,21 +242,16 @@ function startTimer(){
                 clearInterval(timer)
             } 
         }, 1000)
-}
+}//TODO: make code snippet//retrieves scores from local storage
 function getScoreBoard(){
     var scores = []
     for(i = 0; localStorage.getItem("score"+i) != null;i++){
         scores.push(JSON.parse(localStorage.getItem("score"+i)))
     }
-    console.log(localStorage.getItem("score"+0))
-    console.log("scores from function: "+scores)
     return scores
 }
-// TODO: make function tat sorts scores
-function sortScores(array){
-    
-}
-//TODO: cant make play again button work.  maybe because it's created dynamically
+
+//displays scores
 function displayHighScores(){
     var scoresH1 = document.createElement("h1")
     scoresH1.textContent = "Here are the all-time High Scores! Reload the page to play again!!!"
@@ -382,20 +376,16 @@ nexQuestionButton.addEventListener("click", function(){
     renderPostQuizPage()
     }
 })
-//initials form listeners
+//input field form listeners
 
 var initials = window.localStorage.getItem("initials-text-box", JSON.stringify("initials-text-box"))
 var submitButton = document.getElementById("submit-button")
 var initialsTextBox = document.getElementById("initials-text-box")
 
-// //text area listener
-// initialsTextBox.addEventListener("keydown", function(event){
-//     event.preventDefault()
-// })
-
 //initials submit button listener
 submitButton.addEventListener("click", function(event){
     //I copied a lot of work from above to make sure these variables from local storage were defined when the submit button is clicked!
+    //it is excessive, but I needed to make sure it works.  Maybe I'll have time to refactor
     localStorage.setItem("correct-answers", JSON.stringify(correctAnswers))
     localStorage.setItem("incorrect-answers", JSON.stringify(incorrectAnswers))
     localStorage.setItem("time-remaining", JSON.stringify(timeRemaining))
@@ -459,17 +449,18 @@ viewHighScoresPost.addEventListener("click", function(event){
     clearAllPages()
     rednerCurrentPage()
 })
-
-//=========================First Code Executed=============================
-clearAllPages()
-rednerCurrentPage()
-
-test.addEventListener("click", function(){
+//view high scores button listener
+highScoresButton.addEventListener("click", function(){
     currentPage = 3
     clearAllPages()
     rednerCurrentPage()
     getScoreBoard()
     displayHighScores()
 })
+
+//=========================First Code Executed=============================
+clearAllPages()
+rednerCurrentPage()  //starts at page 0
+
 
 
