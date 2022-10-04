@@ -248,10 +248,14 @@ function getScoreBoard(){
     for(i = 0; localStorage.getItem("score"+i) != null;i++){
         scores.push(JSON.parse(localStorage.getItem("score"+i)))
     }
+   // TODO:make sure this works
     return scores
 }
+ 
+
 
 //displays scores
+// scores = sortObject(scores)
 function displayHighScores(){
     var scoresH1 = document.createElement("h1")
     scoresH1.textContent = "Here are the all-time High Scores! Reload the page to play again!!!"
@@ -462,5 +466,5 @@ highScoresButton.addEventListener("click", function(){
 clearAllPages()
 rednerCurrentPage()  //starts at page 0
 
-
+console.log(sortObjects(getScoreBoard()))
 
