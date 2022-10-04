@@ -242,7 +242,7 @@ function startTimer(){
                 clearInterval(timer)
             } 
         }, 1000)
-}//TODO: make code snippet//retrieves scores from local storage
+}
 function getScoreBoard(){
     var scores = []
     for(i = 0; localStorage.getItem("score"+i) != null;i++){

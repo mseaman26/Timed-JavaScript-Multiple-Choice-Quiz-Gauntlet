@@ -8,7 +8,7 @@ This program takes the user through a multiple-choice quiz on the topic of JavaS
 https://mseaman26.github.io/Timed-JavaScript-Multiple-Choice-Quiz-Gauntlet/
 
 ## Languages Used
-The primary languge of focus for this project was JavaScripts, but there was also a significant amount of work with HTML and CSS
+The primary languge of focus for this project was JavaScript, but there was also a significant amount of work with HTML and CSS
 
 ## Notable Features
 -Web API functionality, including DOM traversal, dynamic greation and removal of elements, local storage, and more
