@@ -16,6 +16,7 @@ var pageObjects = [{
     display: "inline"
 }
 ]
+var test = document.getElementById("test")
 var scores = getScoreBoard()
 console.log(scores)
 //selects page index
@@ -252,6 +253,7 @@ function getScoreBoard(){
     console.log("scores from function: "+scores)
     return scores
 }
+// TODO: make function tat sorts scores
 function sortScores(array){
     
 }
@@ -462,6 +464,12 @@ viewHighScoresPost.addEventListener("click", function(event){
 clearAllPages()
 rednerCurrentPage()
 
-
+test.addEventListener("click", function(){
+    currentPage = 3
+    clearAllPages()
+    rednerCurrentPage()
+    getScoreBoard()
+    displayHighScores()
+})
 
 
